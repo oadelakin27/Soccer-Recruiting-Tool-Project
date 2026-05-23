@@ -68,6 +68,17 @@ def edit_school(school_id):
     db.session.commit()
     return render_template("school.html", school=school, tracker=OutreachTracker.query.filter_by(school_id=school_id).first())
 
+@app.route("/my-recruits")
+def my_recruits():
+    trackers = OutreachTracker.query.filter(
+        OutreachTracker.status != 'Not Contacted'
+    ).all()
+    
+    schools = [School.query.get(t.school_id) for t in trackers]
+    school_tracker_pairs = list(zip(schools, trackers))
+    
+    return render_template("my_recruits.html", pairs=school_tracker_pairs)
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
