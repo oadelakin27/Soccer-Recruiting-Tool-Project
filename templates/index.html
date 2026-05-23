@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soccer Recruit Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .school-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .school-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .detail {
+            color: #555;
+            margin: 4px 0;
+        }
+        .label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Soccer Recruit Tool</h1>
+    <p>Track coaching staff, camp dates, and recruiting info for your target schools.</p>
+
+    {% for school in schools %}
+    <div class="school-card">
+        <div class="school-name">{{ school.name }}</div>
+        <p class="detail"><span class="label">Division:</span> {{ school.division }}</p>
+        <p class="detail"><span class="label">Head Coach:</span> {{ school.coach }}</p>
+        <p class="detail"><span class="label">Email:</span> {{ school.email }}</p>
+        <p class="detail"><span class="label">ID Camp Dates:</span> {{ school.camp }}</p>
+    </div>
+    {% endfor %}
+
+</body>
+</html>
