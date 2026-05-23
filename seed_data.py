@@ -5,12 +5,12 @@ schools_data = [
     # Ivy League
     {"name": "Cornell University", "conference": "Ivy League", "state": "New York", "head_coach": "John Smith", "recruiting_contact": "Tyler Keever", "recruiting_email": "tk683@cornell.edu", "camp_dates": "July 2-3, July 11-12, August 1-2"},
     {"name": "Dartmouth College", "conference": "Ivy League", "state": "New Hampshire", "head_coach": "Connor Klekota", "recruiting_contact": "Liam Abdalla", "recruiting_email": "Connor.A.Klekota@dartmouth.edu", "camp_dates": "July 6-8, July 8-10"},
-    {"name": "Yale University", "conference": "Ivy League", "state": "Connecticut", "head_coach": "TBD - verify", "recruiting_contact": "TBD", "recruiting_email": "TBD", "camp_dates": "TBD"},
-    {"name": "Columbia University", "conference": "Ivy League", "state": "New York", "head_coach": "Michael Casper", "recruiting_contact": "TBD", "recruiting_email": "TBD - verify gmail", "camp_dates": "TBD"},
+    {"name": "Yale University", "conference": "Ivy League", "state": "Connecticut", "head_coach": "Kylie Stannard", "recruiting_contact": "TBD", "recruiting_email": "kylie.stannard@yale.edu", "camp_dates": "TBD"},
+    {"name": "Columbia University", "conference": "Ivy League", "state": "New York", "head_coach": "Michael Casper", "recruiting_contact": "TBD", "recruiting_email": "columbiamsoccer@gmail.com", "camp_dates": "TBD"},
     {"name": "University of Pennsylvania", "conference": "Ivy League", "state": "Pennsylvania", "head_coach": "Brian Gill", "recruiting_contact": "TBD", "recruiting_email": "brgill@upenn.edu", "camp_dates": "TBD"},
     {"name": "Harvard University", "conference": "Ivy League", "state": "Massachusetts", "head_coach": "Josh Shapiro", "recruiting_contact": "TBD", "recruiting_email": "msoccer@fas.harvard.edu", "camp_dates": "TBD"},
     {"name": "Brown University", "conference": "Ivy League", "state": "Rhode Island", "head_coach": "Chase Wileman", "recruiting_contact": "TBD", "recruiting_email": "msoccer@brown.edu", "camp_dates": "TBD"},
-    {"name": "Princeton University", "conference": "Ivy League", "state": "New Jersey", "head_coach": "Jim Barlow", "recruiting_contact": "TBD", "recruiting_email": "TBD - verify spelling", "camp_dates": "TBD"},
+    {"name": "Princeton University", "conference": "Ivy League", "state": "New Jersey", "head_coach": "Jim Barlow", "recruiting_contact": "TBD", "recruiting_email": "jimbarlo@princeton.edu", "camp_dates": "TBD"},
 
     # ACC
     {"name": "Duke University", "conference": "ACC", "state": "North Carolina", "head_coach": "John Kerr", "recruiting_contact": "Tristan Wierbonski", "recruiting_email": "tristan.wierbonski@duke.edu", "camp_dates": "TBD"},

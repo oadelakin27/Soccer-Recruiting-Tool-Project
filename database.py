@@ -11,7 +11,6 @@ class School(db.Model):
     recruiting_contact = db.Column(db.String(100))
     recruiting_email = db.Column(db.String(100))
     camp_dates = db.Column(db.String(200))
-    program_notes = db.Column(db.String(500))
 
 class OutreachTracker(db.Model):
     id = db.Column(db.Integer, primary_key=True)

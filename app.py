@@ -23,14 +23,17 @@ def home():
 
     schools = schools.all()
 
+    trackers = {t.school_id: t for t in OutreachTracker.query.all()}
+
     conferences = db.session.query(School.conference).distinct().all()
     conferences = [c[0] for c in conferences if c[0]]
 
     states = db.session.query(School.state).distinct().all()
     states = [s[0] for s in states if s[0]]
 
-    return render_template("index.html", 
+    return render_template("index.html",
                          schools=schools,
+                         trackers=trackers,
                          conferences=conferences,
                          states=states,
                          search=query,
@@ -54,6 +57,16 @@ def update_status(school_id):
     tracker.date_contacted = request.form.get('date_contacted')
     db.session.commit()
     return home()
+
+@app.route("/edit_school/<int:school_id>", methods=["POST"])
+def edit_school(school_id):
+    school = School.query.get_or_404(school_id)
+    school.head_coach = request.form.get('head_coach')
+    school.recruiting_contact = request.form.get('recruiting_contact')
+    school.recruiting_email = request.form.get('recruiting_email')
+    school.camp_dates = request.form.get('camp_dates')
+    db.session.commit()
+    return render_template("school.html", school=school, tracker=OutreachTracker.query.filter_by(school_id=school_id).first())
 
 if __name__ == "__main__":
     with app.app_context():

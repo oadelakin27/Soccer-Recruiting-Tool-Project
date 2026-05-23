@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ school.name }} - Soccer Recruit Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f5f5f5;
+        }
+        h1 { color: #2c3e50; }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .detail {
+            color: #555;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .conference-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: #e8f4fd;
+            color: #1a6fa8;
+            margin-bottom: 12px;
+        }
+        h2 { color: #2c3e50; margin-top: 0; }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .btn-primary {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .btn-primary:hover { background-color: #1a252f; }
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-secondary:hover { background-color: #7f8c8d; }
+        .status-not-contacted { color: #856404; }
+        .status-emailed { color: #0c5460; }
+        .status-responded { color: #155724; }
+        .status-camp-registered { color: #1a6fa8; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a class="back-link" href="/">← Back to all schools</a>
+
+    <div class="card">
+        <h1>{{ school.name }}</h1>
+        <span class="conference-tag">{{ school.conference }}</span>
+        <p class="detail"><span class="label">State:</span> {{ school.state }}</p>
+        <p class="detail"><span class="label">Head Coach:</span> {{ school.head_coach }}</p>
+        <p class="detail"><span class="label">Recruiting Contact:</span> {{ school.recruiting_contact }}</p>
+        <p class="detail"><span class="label">Recruiting Email:</span> {{ school.recruiting_email }}</p>
+        <p class="detail"><span class="label">ID Camp Dates:</span> {{ school.camp_dates }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Edit School Info</h2>
+        <form method="POST" action="/edit_school/{{ school.id }}">
+            <div class="form-group">
+                <label class="form-label">Head Coach</label>
+                <input type="text" name="head_coach" value="{{ school.head_coach }}">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Recruiting Contact</label>
+                <input type="text" name="recruiting_contact" value="{{ school.recruiting_contact }}">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Recruiting Email</label>
+                <input type="text" name="recruiting_email" value="{{ school.recruiting_email }}">
+            </div>
+            <div class="form-group">
+                <label class="form-label">ID Camp Dates</label>
+                <input type="text" name="camp_dates" value="{{ school.camp_dates }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Outreach Tracker</h2>
+        <form method="POST" action="/update_status/{{ school.id }}">
+            <div class="form-group">
+                <label class="form-label">Status</label>
+                <select name="status">
+                    <option value="Not Contacted" {% if tracker and tracker.status == 'Not Contacted' %}selected{% endif %}>Not Contacted</option>
+                    <option value="Emailed" {% if tracker and tracker.status == 'Emailed' %}selected{% endif %}>Emailed</option>
+                    <option value="Responded" {% if tracker and tracker.status == 'Responded' %}selected{% endif %}>Responded</option>
+                    <option value="Camp Registered" {% if tracker and tracker.status == 'Camp Registered' %}selected{% endif %}>Camp Registered</option>
+                    <option value="Camp Attended" {% if tracker and tracker.status == 'Camp Attended' %}selected{% endif %}>Camp Attended</option>
+                    <option value="Not Interested" {% if tracker and tracker.status == 'Not Interested' %}selected{% endif %}>Not Interested</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Date Contacted</label>
+                <input type="text" name="date_contacted" placeholder="e.g. May 23, 2026" value="{{ tracker.date_contacted if tracker else '' }}">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes</label>
+                <textarea name="notes" rows="4" placeholder="e.g. Coach responded within 24 hours, invited to July 2-3 camp...">{{ tracker.notes if tracker else '' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Tracker</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -5,13 +5,42 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
             background-color: #f5f5f5;
         }
         h1 {
             color: #2c3e50;
+        }
+        .filters {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filters input, .filters select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .filters button {
+            padding: 8px 16px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .filters button:hover {
+            background-color: #1a252f;
         }
         .school-card {
             background: white;
@@ -29,10 +58,64 @@
         .detail {
             color: #555;
             margin: 4px 0;
+            font-size: 14px;
         }
         .label {
             font-weight: bold;
             color: #2c3e50;
+        }
+        .conference-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: #e8f4fd;
+            color: #1a6fa8;
+            margin-bottom: 8px;
+        }
+        .count {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .school-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            cursor: pointer;
+        }
+        .status-badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-not-contacted {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-emailed {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        .status-responded {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-camp-registered {
+            background-color: #cce5ff;
+            color: #1a6fa8;
+        }
+        .status-camp-attended {
+            background-color: #e2d9f3;
+            color: #5a2d82;
+        }
+        .status-not-interested {
+            background-color: #f8d7da;
+            color: #842029;
         }
     </style>
 </head>
@@ -40,14 +123,47 @@
     <h1>Soccer Recruit Tool</h1>
     <p>Track coaching staff, camp dates, and recruiting info for your target schools.</p>
 
+    <form class="filters" method="GET" action="/">
+        <input type="text" name="search" placeholder="Search schools..." value="{{ search }}">
+        <select name="conference">
+            <option value="">All Conferences</option>
+            {% for c in conferences %}
+            <option value="{{ c }}" {% if c == selected_conference %}selected{% endif %}>{{ c }}</option>
+            {% endfor %}
+        </select>
+        <select name="state">
+            <option value="">All States</option>
+            {% for s in states %}
+            <option value="{{ s }}" {% if s == selected_state %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search</button>
+        <a href="/"><button type="button">Clear</button></a>
+    </form>
+
+    <p class="count">Showing {{ schools|length }} program(s)</p>
+
     {% for school in schools %}
-    <div class="school-card">
-        <div class="school-name">{{ school.name }}</div>
-        <p class="detail"><span class="label">Division:</span> {{ school.division }}</p>
-        <p class="detail"><span class="label">Head Coach:</span> {{ school.coach }}</p>
-        <p class="detail"><span class="label">Email:</span> {{ school.email }}</p>
-        <p class="detail"><span class="label">ID Camp Dates:</span> {{ school.camp }}</p>
-    </div>
+    <a href="/school/{{ school.id }}">
+        <div class="school-card">
+            <div class="school-name">{{ school.name }}</div>
+            <span class="conference-tag">{{ school.conference }}</span>
+            <p class="detail"><span class="label">State:</span> {{ school.state }}</p>
+            <p class="detail"><span class="label">Head Coach:</span> {{ school.head_coach }}</p>
+            <p class="detail"><span class="label">Recruiting Contact:</span> {{ school.recruiting_contact }}</p>
+            <p class="detail"><span class="label">Recruiting Email:</span> {{ school.recruiting_email }}</p>
+            <p class="detail"><span class="label">ID Camp Dates:</span> {{ school.camp_dates }}</p>
+            {% if trackers[school.id] is defined and trackers[school.id] %}
+            <p class="detail"><span class="label">Status:</span> 
+            <span class="status-badge status-{{ trackers[school.id].status | lower | replace(' ', '-') }}">
+            {{ trackers[school.id].status }}
+            </span></p>
+            {% else %}
+            <p class="detail"><span class="label">Status:</span> 
+            <span class="status-badge status-not-contacted">Not Contacted</span></p>
+            {% endif %}
+        </div>
+    </a>
     {% endfor %}
 
 </body>
