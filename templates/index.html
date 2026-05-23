@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Soccer Recruit Tool</title>
+    <title>Soccer Recruiting Tool</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -121,7 +121,7 @@
 </head>
 <body>
     <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h1>Soccer Recruit Tool</h1>
+        <h1>Soccer Recruiting Tool</h1>
         <a href="/my-recruits" style="padding:10px 20px; background-color:#2c3e50; color:white; border-radius:6px; text-decoration:none; font-size:14px;">My Recruits</a>
     </div>
     <p>Track coaching staff, camp dates, and recruiting info for your target schools.</p>
@@ -153,7 +153,6 @@
             <span class="conference-tag">{{ school.conference }}</span>
             <p class="detail"><span class="label">State:</span> {{ school.state }}</p>
             <p class="detail"><span class="label">Head Coach:</span> {{ school.head_coach }}</p>
-            <p class="detail"><span class="label">Recruiting Contact:</span> {{ school.recruiting_contact }}</p>
             <p class="detail"><span class="label">Recruiting Email:</span> {{ school.recruiting_email }}</p>
             <p class="detail"><span class="label">ID Camp Dates:</span> {{ school.camp_dates }}</p>
             {% if trackers[school.id] is defined and trackers[school.id] %}

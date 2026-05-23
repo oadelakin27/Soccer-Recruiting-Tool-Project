@@ -8,7 +8,6 @@ class School(db.Model):
     conference = db.Column(db.String(100))
     state = db.Column(db.String(50))
     head_coach = db.Column(db.String(100))
-    recruiting_contact = db.Column(db.String(100))
     recruiting_email = db.Column(db.String(100))
     camp_dates = db.Column(db.String(200))
 
