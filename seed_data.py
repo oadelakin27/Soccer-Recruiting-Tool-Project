@@ -55,9 +55,6 @@ schools_data = [
     {"name": "UCLA", "conference": "Big Ten", "state": "California", "head_coach": "Ryan Jorden", "recruiting_email": "msoccer@athletics.ucla.edu", "camp_dates": "TBD"},
     {"name": "University of Washington", "conference": "Big Ten", "state": "Washington", "head_coach": "Jamie Clark", "recruiting_email": "huskysoccer@uw.edu", "camp_dates": "TBD"},
     {"name": "University of Wisconsin", "conference": "Big Ten", "state": "Wisconsin", "head_coach": "Neil Jones", "recruiting_email": "wisconsinmsoc@athletics.wisc.edu", "camp_dates": "TBD"},
-
-    # AAC
-    {"name": "Rice University", "conference": "AAC", "state": "Texas", "head_coach": "TBD", "recruiting_email": "TBD", "camp_dates": "TBD"},
 ]
 
 with app.app_context():

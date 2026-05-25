@@ -21,7 +21,7 @@ def home():
     if state:
         schools = schools.filter(School.state == state)
 
-    schools = schools.all()
+    schools = schools.order_by(School.name).all()
 
     trackers = {t.school_id: t for t in OutreachTracker.query.all()}
 
